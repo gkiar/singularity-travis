@@ -2,8 +2,8 @@ dist: trusty
 sudo: required
 
 before_install:
-- sudo apt-get update
-- sudo apt-get install python dh-autoreconf build-essential
+- sudo apt-get update -qq
+- sudo apt-get install -y -qq python dh-autoreconf build-essential
 
 env:
 - VER=2.4.1
