@@ -19,6 +19,6 @@ install:
 
 script:
 - singularity run shub://GodloveD/lolcow
-- singularity pull --name "bids-example.simg" docker://bids/example:latest
+- sudo singularity pull -d --name "bids-example.simg" docker://bids/example:latest
 - singularity exec bids-example.simg /run.py --help
 
