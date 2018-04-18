@@ -6,7 +6,7 @@ before_install:
 - apt-get install python dh-autoreconf build-essential
 
 env:
--VER=2.4.1
+- VER=2.4.1
 
 install:
 - wget https://github.com/singularityware/singularity/releases/download/$VER/singularity-$VER.tar.gz
