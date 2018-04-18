@@ -2,12 +2,19 @@ dist: trusty
 sudo: required
 
 before_install:
-- wget -O- http://neuro.debian.net/lists/xenial.us-ca.full | sudo tee /etc/apt/sources.list.d/neurodebian.sources.list
-- apt-key adv --recv-keys --keyserver hkp://pool.sks-keyservers.net:80 0xA5D32F012649A5A9
 - sudo apt-get update
+- sudo apt-get install python dh-autoreconf build-essential
+
+env:
+-VER=2.4.1
 
 install:
-- sudo apt-get install -y singularity-container
+- wget https://github.com/singularityware/singularity/releases/download/$VER/singularity-$VER.tar.gz
+- tar xvf singularity-$VER.tar.gz
+- cd singularity-$VER
+- ./configure --prefix=/usr/local --sysconfdir=/etc
+- make
+- sudo make install
 - singularity --version
 
 script:
