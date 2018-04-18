@@ -18,5 +18,5 @@ install:
 - singularity --version
 
 script:
-- singularity --debug run shub://GodloveD/lolcow
+- singularity run shub://GodloveD/lolcow
 
