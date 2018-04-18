@@ -2,8 +2,8 @@ dist: trusty
 sudo: required
 
 before_install:
-- sudo apt-get update
-- sudo apt-get install python dh-autoreconf build-essential
+- apt-get update
+- apt-get install python dh-autoreconf build-essential
 
 env:
 -VER=2.4.1
@@ -14,7 +14,7 @@ install:
 - cd singularity-$VER
 - ./configure --prefix=/usr/local --sysconfdir=/etc
 - make
-- sudo make install
+- make install
 - singularity --version
 
 script:
