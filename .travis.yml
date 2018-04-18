@@ -12,8 +12,8 @@ before_install:
 - sudo apt-get install -y -qq python dh-autoreconf squashfs-tools build-essential
 - docker build -t user/exampledocker .
 - docker run -v /var/run/docker.sock:/var/run/docker.sock -v ${HOME}:/output --privileged -t --rm singularityware/docker2singularity user/exampledocker  1> ${HOME}/convert_log.txt
-- IMGNAME=$(cat ${HOME}/convert_log.txt  | grep "Done. Image can be found at:" | awk '{ print $7 }' | cut -d / -f 3)
-- mv ${HOME}/${IMGNAME} ${HOME}/user-exampledocker.simg
+- IMGNAME=$(cat ${HOME}/convert_log.txt  | grep "Done. Image can be found at:" | awk '{ print $7 }' | cut -d / -f 3 | cut -d . -f 1)
+- mv ${HOME}/${IMGNAME}.img ${HOME}/user-exampledocker.simg
 - ls ${HOME}
 
 install:
