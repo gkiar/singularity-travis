@@ -28,7 +28,7 @@ install:
 
 script:
 - singularity run shub://GodloveD/lolcow  # Test pull/run from Singularity hub
-- singularity run user-exampleDocker.simg TESTING  # Test exec on docker2singularity converted image
+- singularity run user-exampledocker.simg TESTING  # Test exec on docker2singularity converted image
 - sudo singularity pull --name "bids-example.simg" docker://bids/example:latest  # Test pull/convert from Docker hub
 - singularity exec bids-example.simg /run.py --help  # Test exec on Docker pulled image
 
