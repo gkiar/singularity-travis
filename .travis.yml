@@ -10,8 +10,8 @@ env:
 before_install:
 - sudo apt-get update -qq
 - sudo apt-get install -y -qq python dh-autoreconf squashfs-tools build-essential
-- docker build -t user/exampleDocker .
-- docker run -v /var/run/docker.sock:/var/run/docker.sock -v ${HOME}:/output --privileged -t --rm singularityware/docker2singularity user/exampleDocker
+- docker build -t user/exampledocker .
+- docker run -v /var/run/docker.sock:/var/run/docker.sock -v ${HOME}:/output --privileged -t --rm singularityware/docker2singularity user/exampledocker
 - ls ${HOME}
 
 install:
