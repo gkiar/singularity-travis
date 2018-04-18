@@ -1,12 +1,18 @@
 dist: trusty
 sudo: required
 
-before_install:
-- sudo apt-get update -qq
-- sudo apt-get install -y -qq python dh-autoreconf squashfs-tools build-essential
+services:
+- docker
 
 env:
 - VER=2.4.6
+
+before_install:
+- sudo apt-get update -qq
+- sudo apt-get install -y -qq python dh-autoreconf squashfs-tools build-essential
+- docker build -t user/exampleDocker .
+- docker run -v /var/run/docker.sock:/var/run/docker.sock -v ${HOME}:/output --privileged -t --rm singularityware/docker2singularity user/exampleDocker
+- ls ${HOME}
 
 install:
 - wget https://github.com/singularityware/singularity/releases/download/$VER/singularity-$VER.tar.gz
@@ -16,9 +22,11 @@ install:
 - make
 - sudo make install
 - singularity --version
+- cd ${HOME}
 
 script:
-- singularity run shub://GodloveD/lolcow
-- sudo singularity -d pull --name "bids-example.simg" docker://bids/example:latest
-- singularity exec bids-example.simg /run.py --help
+- singularity run shub://GodloveD/lolcow  # Test pull/run from Singularity hub
+- singularity run user-exampleDocker.simg TESTING  # Test exec on docker2singularity converted image
+- sudo singularity pull --name "bids-example.simg" docker://bids/example:latest  # Test pull/convert from Docker hub
+- singularity exec bids-example.simg /run.py --help  # Test exec on Docker pulled image
 
